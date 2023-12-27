@@ -1,22 +1,51 @@
 const cityForm = document.querySelector("[data-js=change-location]");
-const cityName = document.querySelector("[data-js='city-name'");
-const cityWeather = document.querySelector("[data-js='city-weather'");
-const cityTemperature = document.querySelector("[data-js='city-temperature'");
-const cityCard = document.querySelector("[data-js='city-card']")
+const cityName = document.querySelector("[data-js='city-name']");
+const cityWeather = document.querySelector("[data-js='city-weather']");
+const cityTemperature = document.querySelector("[data-js='city-temperature']");
+const cityCard = document.querySelector("[data-js='city-card']");
+let imgTime = document.querySelector("[data-js='time']");
+const timeIconContainer = document.querySelector("[data-js='time-icon']");
 
-cityForm.addEventListener("submit", async (event) => {
+const showCityCard = () => {
+  if (cityCard.classList.contains("d-none")) {
+    cityCard.classList.remove("d-none");
+  }
+};
+const showWeatherCityInfo = async (cityNameInfo) => {
+try{
+  const [{ Key, LocalizedName }] = await getCityData(cityNameInfo);
+  const [{ WeatherText, Temperature, IsDayTime, WeatherIcon }] =
+    await getCityWeather(Key);
+
+  const timeIcon = `<img src="./src/icons/${WeatherIcon}.svg"/>`;
+
+  imgTime.src = IsDayTime ? "./src/day.svg" : "./src/night.svg";
+  timeIconContainer.innerHTML = timeIcon;
+  cityName.textContent = LocalizedName;
+  cityWeather.textContent = WeatherText;
+  cityTemperature.textContent = Temperature.Metric.Value;
+
+  showCityCard();
+}catch(error){
+  alert('Error: Cidade não encontrada')
+}
+
+};
+
+const getCityNameOnLocalStorage = () => {
+  const city = localStorage.getItem("lastValueUser");
+  if (city) {
+    showWeatherCityInfo(city);
+  }
+};
+cityForm.addEventListener("submit", (event) => {
   event.preventDefault();
 
-  const inputValeu = event.target.city.value;
+  const inputValue = event.target.city.value;
+  localStorage.setItem("lastValueUser", inputValue);
 
-  const [{ Key, LocalizedName }] = await getCityData(inputValeu);
-  const [{ WeatherText, Temperature }] = await getCityWeather(Key);
-  
-  if(cityCard.classList.contains('d-none')){
-    cityCard.classList.remove('d-none');
-  }
-  cityName.textContent = LocalizedName
-  cityWeather.textContent = WeatherText
-  cityTemperature.textContent = Temperature.Metric.Value
-
+  showWeatherCityInfo(inputValue);
+  cityForm.reset();
 });
+
+getCityNameOnLocalStorage();
