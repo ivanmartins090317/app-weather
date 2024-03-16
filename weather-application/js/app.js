@@ -11,11 +11,18 @@ const showCityCard = () => {
     cityCard.classList.remove("d-none");
   }
 };
-const showWeatherCityInfo = async (cityNameInfo) => {
-try{
+
+const fetchWeatherInfo = async (cityNameInfo) => {
   const [{ Key, LocalizedName }] = await getCityData(cityNameInfo);
   const [{ WeatherText, Temperature, IsDayTime, WeatherIcon }] =
     await getCityWeather(Key);
+
+  return { LocalizedName, WeatherText, Temperature, IsDayTime, WeatherIcon };
+}
+const showWeatherCityInfo = async (cityNameInfo) => {  
+try{
+  const { LocalizedName, WeatherText, Temperature, IsDayTime, WeatherIcon} =
+  await fetchWeatherInfo(cityNameInfo);
 
   const timeIcon = `<img src="./src/icons/${WeatherIcon}.svg"/>`;
 
@@ -38,7 +45,8 @@ const getCityNameOnLocalStorage = () => {
     showWeatherCityInfo(city);
   }
 };
-cityForm.addEventListener("submit", (event) => {
+
+const hendleFormSubmit = (event) => {
   event.preventDefault();
 
   const inputValue = event.target.city.value;
@@ -46,6 +54,8 @@ cityForm.addEventListener("submit", (event) => {
 
   showWeatherCityInfo(inputValue);
   cityForm.reset();
-});
+}
+
+cityForm.addEventListener("submit", hendleFormSubmit);
 
 getCityNameOnLocalStorage();

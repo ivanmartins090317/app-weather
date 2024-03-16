@@ -1,5 +1,6 @@
 body {
   background: #233047;
+  font-family:"Roboto", sans-serif;
 }
 
 .container {
@@ -7,6 +8,7 @@ body {
 }
 
 h1 {
+  font-weight:500;
   font-size: 2.2rem;
 }
 .timeIcon{
