@@ -14,11 +14,10 @@ In the application you can search for the city you want to know the weather for 
 ---
 
 **Screen**
-<<<<<<< HEAD
-![alt text](/weather-application/public/Capa-projeto-appweather.png)
-=======
-![alt text](./public/Capa-projeto-appweather.png)
->>>>>>> c9d2ebccac9dc1ca739876ac39cd902ba2047b3d
+
+# ![alt text](/weather-application/public/Capa-projeto-appweather.png)
+
+![Imagem capa do projeto](./public/Capa-projeto-appweather.png)
 
 # Improvements
 
