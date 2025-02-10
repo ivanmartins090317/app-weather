@@ -13,11 +13,9 @@ In the application you can search for the city you want to know the weather for 
 
 ---
 
-**Screen**
+**Screen 📷**
 
-# ![alt text](/weather-application/public/Capa-projeto-appweather.png)
-
-![Imagem capa do projeto](./public/Capa-projeto-appweather.png)
+# ![Imagem capa do projeto](/weather-application/public/Capa-projeto-appweather.png)
 
 # Improvements
 
