@@ -43,7 +43,7 @@ const getCityNameOnLocalStorage = () => {
   const city = localStorage.getItem("lastValueUser");
   if (city) {
     showWeatherCityInfo(city);
-  }
+  }  
 };
 
 const hendleFormSubmit = (event) => {
